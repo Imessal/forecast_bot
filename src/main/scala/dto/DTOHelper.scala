@@ -52,7 +52,7 @@ object DTOHelper {
             s"Ветер: ${dto.fact.wind_speed} 💨\n" ++
             s"Влажность: $humidity\n" ++
             s"Время восхода Солнца: ${dto.forecast.sunrise} 🌅\n" ++
-            s"Время заката солнца: ${dto.forecast.sunset} 🌇"
+            s"Время заката Солнца: ${dto.forecast.sunset} 🌇"
 
     }
 
