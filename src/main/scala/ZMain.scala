@@ -4,6 +4,7 @@ import db._
 import service.canoe.{CanoeClient, CanoeScenarios, CanoeService}
 import service.{ApiWeatherClient, ApiWeatherService}
 import zio._
+import zio.logging.slf4j.Slf4jLogger
 import zio.magic._
 
 object ZMain extends App {
@@ -14,13 +15,13 @@ object ZMain extends App {
             CanoeClient.live >+>
             ApiWeatherClient.live >+>
             ApiWeatherService.live >+>
+            Slf4jLogger.make((_, msg) => msg) >+>
             CanoeScenarios.live >+>
             CanoeService.live
-    /* ++ Slf4jLogger.make((_, msg) => msg) */
+
 
     val app = for {
-        config <- zio.config.getConfig[Config]
-        _      <- performMigration
+        _ <- performMigration
     } yield ()
 
     val magically: ZIO[Any, Throwable, Unit] =
