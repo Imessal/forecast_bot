@@ -1,7 +1,7 @@
 package service
 
 import configuration.{Config, Configuration}
-import const.Const
+import const.Const.Cities._
 import dao.entities.User
 import dao.repository.UserRepo
 import dao.repository.UserRepo.UserRepo
@@ -28,7 +28,7 @@ object ApiWeatherService {
 
         override def getWeatherForecast(userId: Long): ZIO[DataSource, Throwable, WeatherResponse] = for {
             userCity <- userRepo.findCityCode(userId).map(_.getOrElse("MSK"))
-            city = Const.citiesByCode.getOrElse(userCity, Const.Moscow)
+            city = citiesByCode.getOrElse(userCity, Moscow)
             response <- weatherClient.makeRequest(city, config)
         } yield response
 

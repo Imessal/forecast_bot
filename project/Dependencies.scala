@@ -13,7 +13,6 @@ object Dependencies {
 
     lazy val LogbackVersion = "1.2.3"
 
-    lazy val bot4sVersion = "5.4.2"
     lazy val canoeVersion = "0.6.0"
 
     lazy val pureconfig: Seq[ModuleID] = Seq(
@@ -27,7 +26,7 @@ object Dependencies {
         "dev.zio"              %% "zio-test"          % ZioVersion,
         "dev.zio"              %% "zio-test-sbt"      % ZioVersion,
         "dev.zio"              %% "zio-macros"        % ZioVersion,
-        "dev.zio"              %% "zio-logging-slf4j" % "0.3.2",
+        "dev.zio"              %% "zio-logging-slf4j" % "0.5.14",
         "io.github.kitlangton" %% "zio-magic"         % "0.3.12"
     )
 
