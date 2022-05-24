@@ -42,13 +42,16 @@ object CanoeScenarios {
         private val windEarthFireSticker  = StickerContent(Stickers.WindEarthFireStrickerMessage)
         private val noTimeForGamesSticker = StickerContent(Stickers.NoTimeForGamesStickerMessage)
 
-        private val greetingKeyboardMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(buttonColumn =
-            Seq(KeyboardButton("Екатеринбург"), KeyboardButton("Москва"), KeyboardButton("Санкт-Петербург"))
+        private val greetingKeyboardMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(
+            buttonColumn =
+                Seq(KeyboardButton("Екатеринбург"), KeyboardButton("Москва"), KeyboardButton("Санкт-Петербург")),
+            resizeKeyboard = Some(true)
         )
         private val greetingKeyboard: Keyboard.Reply = Keyboard.Reply(greetingKeyboardMarkup)
 
         private val cityMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(buttonColumn =
-            Seq(KeyboardButton("Узнать прогноз"), KeyboardButton("Сменить город"))
+            Seq(KeyboardButton("Узнать прогноз"), KeyboardButton("Сменить город")),
+            resizeKeyboard = Some(true)
         )
         private val cityKeyboard: Keyboard.Reply = Keyboard.Reply(cityMarkup)
 
