@@ -7,7 +7,7 @@ object Const {
 
     object Stickers {
 
-        val WindEarthFireStrickerMessage: InputFile.Existing =
+        val WindEarthFireStickerMessage: InputFile.Existing =
             InputFile.Existing(key = "CAACAgIAAxkBAAEEz5hijItEQIffBfPyFK6R0_NrqR9obQACRwEAApAAAVAg3CkzICIOccckBA")
 
         val NoTimeForGamesStickerMessage: InputFile.Existing =

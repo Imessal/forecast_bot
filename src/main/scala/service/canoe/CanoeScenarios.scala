@@ -39,7 +39,7 @@ object CanoeScenarios {
 
         implicit private val client: TelegramClient[Task] = canoeClient
 
-        private val windEarthFireSticker  = StickerContent(Stickers.WindEarthFireStrickerMessage)
+        private val windEarthFireSticker  = StickerContent(Stickers.WindEarthFireStickerMessage)
         private val noTimeForGamesSticker = StickerContent(Stickers.NoTimeForGamesStickerMessage)
 
         private val greetingKeyboardMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(
