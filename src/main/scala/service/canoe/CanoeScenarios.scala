@@ -13,8 +13,8 @@ import dao.repository.UserRepo
 import dao.repository.UserRepo.UserRepo
 import db.DataSource
 import dto.DTOHelper
-import service.ApiWeatherService
-import service.ApiWeatherService.ApiWeatherService
+import service.WeatherService
+import service.WeatherService.ApiWeatherService
 import zio.interop.catz._
 import zio.{Has, Task, ZIO, ZLayer}
 
@@ -33,7 +33,7 @@ object CanoeScenarios {
 
     class Impl(
         canoeClient: TelegramClient[Task],
-        apiWeatherService: ApiWeatherService.Service,
+        weatherService: WeatherService.Service,
         userRepo: UserRepo.Service
     ) extends Service {
 
@@ -49,8 +49,8 @@ object CanoeScenarios {
         )
         private val greetingKeyboard: Keyboard.Reply = Keyboard.Reply(greetingKeyboardMarkup)
 
-        private val cityMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(buttonColumn =
-            Seq(KeyboardButton("Узнать прогноз"), KeyboardButton("Сменить город")),
+        private val cityMarkup: ReplyKeyboardMarkup = ReplyKeyboardMarkup.singleColumn(
+            buttonColumn = Seq(KeyboardButton("Узнать прогноз"), KeyboardButton("Сменить город")),
             resizeKeyboard = Some(true)
         )
         private val cityKeyboard: Keyboard.Reply = Keyboard.Reply(cityMarkup)
@@ -76,7 +76,7 @@ object CanoeScenarios {
                     case "Узнать прогноз" =>
                         (for {
                             _       <- Scenario.eval(chat.send(windEarthFireSticker))
-                            weather <- Scenario.eval(apiWeatherService.getWeatherForecastTask(user.id))
+                            weather <- Scenario.eval(weatherService.getWeatherForecastTask(user.id))
                             _       <- Scenario.eval(chat.send(DTOHelper.yandexDTOtoMainMessage(weather)))
                             _       <- Scenario.eval(chat.send(DTOHelper.yandexDTOtoForecastMessage(weather)))
                         } yield ()) >> getWeather(chat, user)
@@ -158,7 +158,7 @@ object CanoeScenarios {
         ZLayer.fromManaged {
             for {
                 client         <- ZIO.service[TelegramClient[Task]].toManaged_
-                weatherService <- ZIO.service[ApiWeatherService.Service].toManaged_
+                weatherService <- ZIO.service[WeatherService.Service].toManaged_
                 repo           <- ZIO.service[UserRepo.Service].toManaged_
             } yield new Impl(client, weatherService, repo)
         }

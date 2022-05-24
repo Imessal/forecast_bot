@@ -10,7 +10,7 @@ import dto.YandexWeatherDTOs.WeatherResponse
 import service.ApiWeatherClient.ApiWeatherClient
 import zio.{Has, Task, ZIO, ZLayer}
 
-object ApiWeatherService {
+object WeatherService {
 
     type ApiWeatherService = Has[Service]
 
@@ -45,8 +45,8 @@ object ApiWeatherService {
         ZLayer.fromManaged {
             for {
                 weatherClient <- ZIO.service[ApiWeatherClient.Service].toManaged_
-                userRepo <- ZIO.service[UserRepo.Service].toManaged_
-                config <- ZIO.service[Config].toManaged_
+                userRepo      <- ZIO.service[UserRepo.Service].toManaged_
+                config        <- ZIO.service[Config].toManaged_
             } yield new Impl(weatherClient, userRepo, config)
         }
 

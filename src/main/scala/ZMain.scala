@@ -2,7 +2,7 @@ import configuration._
 import dao.repository.UserRepo
 import db._
 import service.canoe.{CanoeClient, CanoeScenarios, CanoeService}
-import service.{ApiWeatherClient, ApiWeatherService}
+import service.{ApiWeatherClient, WeatherService}
 import zio._
 import zio.logging.slf4j.Slf4jLogger
 import zio.magic._
@@ -14,7 +14,7 @@ object ZMain extends App {
             UserRepo.live >+>
             CanoeClient.live >+>
             ApiWeatherClient.live >+>
-            ApiWeatherService.live >+>
+            WeatherService.live >+>
             Slf4jLogger.make((_, msg) => msg) >+>
             CanoeScenarios.live >+>
             CanoeService.live

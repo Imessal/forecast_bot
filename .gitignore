@@ -3,4 +3,4 @@
 /target/
 .idea
 .bsp
-src/main/resources/custom_*.conf
+src/main/resources/custom*.conf
