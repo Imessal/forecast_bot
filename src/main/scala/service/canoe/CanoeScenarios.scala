@@ -90,6 +90,7 @@ object CanoeScenarios {
 
         def registerUser(chat: Chat, userData: UserData): Scenario[Task, User] = {
             for {
+                _      <- Scenario.eval(chat.send("Здравствуй, Вождь. Данные предоставлены сервисом Яндекс.Погода"))
                 _      <- Scenario.eval(chat.send("Приказывай..."))
                 _      <- Scenario.eval(chat.send("В каком городе смотрим погоду?", keyboard = greetingKeyboard))
                 city   <- safeRequest(chat).map(_.text)
